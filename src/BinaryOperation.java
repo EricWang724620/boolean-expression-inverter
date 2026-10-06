@@ -1,5 +1,5 @@
 
-public abstract class BinaryOperation extends BooleanNode{
+public abstract class BinaryOperation extends MutableBooleanNode{
 	protected BooleanNode left;
 	protected BooleanNode right;
 	

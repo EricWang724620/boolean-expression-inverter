@@ -1,8 +1,6 @@
-import java.util.Collections;
 import java.util.Set;
 
-public class Variable extends MutableBooleanNode{
-	private String name;
+public abstract class MutableBooleanNode extends BooleanNode{
 	// stores the boolean value of the current node
 	// the value can represent a single variable's boolean variable, a fixed boolean input, 
 	// or a result of a sequence of boolean operations on multiple boolean variable and/or fixed inputs
@@ -13,23 +11,29 @@ public class Variable extends MutableBooleanNode{
 	
 	// the Set of variables inside this node that can flip and flip all of them will cause inversion of current node result
 	private Set<Variable> variablesToFlip;
-	public Variable(String name, boolean value) {
-		this.name=name;
-		setNodeValue(value);
-		setInvertible(true);
-		setVariablesToFlip(Set.of(this));
-		//System.out.println("there"+value);
 
-	}
-	@Override
-	public boolean evaluate() {
+    @Override
+    public boolean getNodeValue() {
+        return nodeValue;
+    }
+
+    protected void setNodeValue(boolean value) {
+        nodeValue = value;
+    }
+    @Override
+	public boolean isInvertible() {
 		// TODO Auto-generated method stub
-		return getNodeValue();
+		return this.invertible;
 	}
-	
 	@Override
-	public String toString() {
-	    return name;
+	public Set<Variable> getVariablesToFlip() {
+		// TODO Auto-generated method stub
+		return this.variablesToFlip;
 	}
-
+	protected void setInvertible(boolean value) {
+		this.invertible=value;
+	}
+    protected void setVariablesToFlip(Set<Variable> variables) {
+        this.variablesToFlip = variables;
+    }
 }
